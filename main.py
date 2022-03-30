@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as Bs
 from Scraper import Scrap as Sc
+import time
 
 # VARIABLES
 URL = "https://www.amazon.com.tr/JBLC100SIUBLK-C100-JBL-Kulak-Kulakl%C4%B1k/dp/B01DEWVZ2C/ref=sr_1_5?__mk_tr_TR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=3B359DH5STAEZ&keywords=kulakl%C4%B1k&qid=1648578903&sprefix=kulakl%C4%B1k%2Caps%2C122&sr=8-5"
@@ -17,4 +18,10 @@ soup = Bs(page.content, 'html.parser')
 product_title = soup.find(id="productTitle").text.strip()
 product_price = int(soup.find("span", {"class": "a-offscreen"}).text.replace(",", "").replace("TL", ""))
 
+# Create Scraper
 track_products = Sc(is_sms=sms, is_email=email, product_url=URL, product_title=product_title, product_price=product_price)
+
+# Check product price every 5 seconds
+while(True):
+    track_products.check_price_from_url()
+    time.sleep(5)
