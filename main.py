@@ -18,4 +18,3 @@ product_title = soup.find(id="productTitle").text.strip()
 product_price = int(soup.find("span", {"class": "a-offscreen"}).text.replace(",", "").replace("TL", ""))
 
 track_products = Sc(is_sms=sms, is_email=email, product_url=URL, product_title=product_title, product_price=product_price)
-
