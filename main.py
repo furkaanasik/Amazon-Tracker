@@ -10,7 +10,7 @@ tracker_price = int(input("Tracker Price = "))
 
 # CONNECT URL and GET HTML CODE
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36"}
-page = requests.get(URL, headers= headers)
+page = requests.get(URL, headers=headers)
 soup = Bs(page.content, 'html.parser')
 
 # FIND TITLE and PRICE VARIABLE
