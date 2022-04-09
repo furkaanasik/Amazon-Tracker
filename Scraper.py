@@ -1,6 +1,6 @@
 import requests
-import Keys
 import os
+import smtplib
 from twilio.rest import Client
 from bs4 import BeautifulSoup as Bs
 from dotenv import load_dotenv
@@ -22,8 +22,6 @@ class Scrap:
         self.is_email = is_email
         self.is_sms = is_sms
         self.product_url = product_url
-        # Request
-        self.request_url()
 
     # Send request link
     def request_url(self):
@@ -50,7 +48,7 @@ class Scrap:
 
     # Check product price. if tracking price is bigger than product price send email or sms.
     def check_price_from_url(self):
-        print("Checking price...")
+        self.request_url()
         if self.is_Track:
             self.product_price = int(self.soup.find("span", {"class": "a-offscreen"})
                                      .text.replace(",", "").replace("TL", ""))
@@ -77,4 +75,19 @@ class Scrap:
 
     # Send email
     def send_email(self):
-        print("mail")
+        load_dotenv()
+
+        sender = os.getenv("email")
+        subject = "Amazon Product Tracker"
+        body = f"{self.product_title} product has dropped below {self.tracker_price}!"
+
+        message = 'Subject: {}\n\n{}'.format(subject, body).encode("utf-8")
+
+        server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+
+        try:
+            server.login(sender, os.getenv("email_password"))
+            server.sendmail(sender, self.email, message)
+            print("Email has been send!")
+        except smtplib.SMTPAuthenticationError:
+            print("unable to sign in")

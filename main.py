@@ -1,4 +1,3 @@
-import Scraper
 from Scraper import Scrap as Sc
 import time
 
