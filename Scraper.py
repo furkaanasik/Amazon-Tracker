@@ -64,13 +64,14 @@ class Scrap:
     # Send sms
     def send_sms(self):
         load_dotenv()
-
+        """
         client = Client(os.getenv("account_sid"), os.getenv("auth_token"))
         client.messages.create(
             body=f"{self.product_title} product has dropped below {self.tracker_price}!",
             from_=os.getenv("twilio_number"),
             to=self.phone_number
         )
+        """
         print("sms")
 
     # Send email
