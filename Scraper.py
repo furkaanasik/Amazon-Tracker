@@ -1,7 +1,6 @@
 import requests
 import os
 import smtplib
-from twilio.rest import Client
 from bs4 import BeautifulSoup as Bs
 from dotenv import load_dotenv
 
@@ -10,10 +9,11 @@ class Scrap:
     is_Track = True
 
     def __init__(self, *, is_sms=False, is_email=False, product_url=""):
+        load_dotenv()
         if is_email:
-            self.email = str(input("Please enter your email = "))
+            self.email = os.getenv("email")
         if is_sms:
-            self.phone_number = str(input("Please enter your phone number = "))
+            self.phone_number = os.getenv("phone_number")
 
         self.product_title = None
         self.product_price = None
@@ -63,8 +63,9 @@ class Scrap:
 
     # Send sms
     def send_sms(self):
-        load_dotenv()
         """
+        load_dotenv()
+
         client = Client(os.getenv("account_sid"), os.getenv("auth_token"))
         client.messages.create(
             body=f"{self.product_title} product has dropped below {self.tracker_price}!",
