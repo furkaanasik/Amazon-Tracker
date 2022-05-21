@@ -14,7 +14,7 @@ Here's why:
 1. Time
     - `pip install python-time`
 2. requests
-    - `pip install request`
+    - `pip install requests`
 3. BeautifulSoup
     - `pip install beautifulsoup4`
 4. dotenv
