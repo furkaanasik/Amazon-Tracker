@@ -30,4 +30,4 @@ To run this program:
  6. Run this code on the server-side.
 
 ## Contact
-Furkan Aşık - [@furkaanasik](https://twitter.com/furkaanasik) - furkaanasik@gmail.com
+Furkan Aşık - furkaanasik@gmail.com
